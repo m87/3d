@@ -3,17 +3,17 @@ width=10;
 height=10;
 depth=10;
 radius=1;
-
+fit=0.225;
+grip=true;
 
 y=3; 
-x=1; 
 map = [ 
         ["aaa", "aaa", "aaa"]
-      //  ["aaa", "aaa"],
+        //["aa", "aaa", "aa"],
     ];
 //map = [[],[],[]];
 
-
+x=len(map);
 
 module aa() {
     width=14;
@@ -26,7 +26,7 @@ module aaa() {
     width=11;
     height=45.25;
    	
-    translate([0,0,5.75])
+    
     cylinder(h = height, d = width);
 }
 
@@ -44,29 +44,31 @@ module top(width, depth, height, radius, thickness) {
           square([width+thickness, depth+thickness], center=true);
          
          translate([0,0,thickness])
-         base(width+0.5, depth+0.5, height, radius);
+         base(width+fit, depth+fit, height, radius);
     }
 }
 
-biggest=max([for (y = map)  each(y)]);
-    
 
-function ww(batt) = (batt == "aaa") ? 11 : 15;
+function ww() = (min([for (y = map)  each(y)]) == "aaa") ? 11 : 15;
+function hh() = (min([for (y = map)  each(y)]) == "aaa") ? 50 : 53;
 
-www=ww(biggest);
+www=ww();
 
-translate([20, 2*depth, 0])
+translate([x*22, 2*depth, 0])
+difference(){
 top(www*x, www*y, 40, radius, thickness);
+if(grip) rotate([0,90,0]) translate([-www*y+10,0,-www*x/2-thickness]) cylinder(www*x+thickness*2,r=10);
+}
 
 module create(battery) {
- if(battery == "aa") aa();
- if(battery == "aaa") aaa();
+ if(battery == "aa") translate([0,0,2]) aa();
+ if(battery == "aaa") translate([0,0,7.75]) aaa();
     
 }
 
 difference(){
 translate([www*x/2-www/2, www*y/2-www/2])
-base(www*x, www*y, 51, radius);
+base(www*x, www*y, hh(), radius);
 
 
 for(y = [0:len(map)-1]) {
@@ -75,3 +77,4 @@ for(y = [0:len(map)-1]) {
   }
 }
     }
+
