@@ -1,29 +1,32 @@
+// Edit this parameter in file! 
 map = [ 
-        ["aa", "aaa", "aaa"],
-        //["aaa", "aaa"],
-        //["aaa", "aaa"]
+        ["aaa", "aaa", "aaa"],
     ];
 
+
+// cap thickness
 thickness=3;
-width=10;
-height=10;
-depth=10;
+// corener radius
 radius=1;
+// test
 fit=0.225;
 grip=true;
+
+
+x=len(map);
+y=max([for (y = map)  each(len(y))]);
+maxR = (min([for (y = map)  each(y)]) == "aaa") ? 13 : 17;
+maxH = (min([for (y = map)  each(y)]) == "aaa") ? 50 : 53;
 
 module aa() {
     width=15;
     height=51;
-    
     cylinder(h = height, d = width);
 }
 
 module aaa() {
     width=11;
     height=45.25;
-   	
-    
     cylinder(h = height, d = width);
 }
 
@@ -45,16 +48,9 @@ module top(width, depth, height, radius, thickness) {
     }
 }
 
-x=len(map);
-y=max([for (y = map)  each(len(y))]);
-maxR = (min([for (y = map)  each(y)]) == "aaa") ? 13 : 17;
-maxH = (min([for (y = map)  each(y)]) == "aaa") ? 50 : 53;
-
-
 module create(battery) {
  if(battery == "aa") translate([0,0,2.5]) aa(); //2
  if(battery == "aaa") translate([0,0,8.5]) aaa(); //7.75
-    
 }
 
 translate([maxR*x*2, maxR*y/2-maxR/2])
