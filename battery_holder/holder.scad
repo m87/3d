@@ -13,7 +13,7 @@ fit=0.225;
 grip=true;
 
 module aa() {
-    width=14;
+    width=15;
     height=51;
     
     cylinder(h = height, d = width);
@@ -47,13 +47,13 @@ module top(width, depth, height, radius, thickness) {
 
 x=len(map);
 y=max([for (y = map)  each(len(y))]);
-maxR = (min([for (y = map)  each(y)]) == "aaa") ? 11 : 15;
+maxR = (min([for (y = map)  each(y)]) == "aaa") ? 13 : 17;
 maxH = (min([for (y = map)  each(y)]) == "aaa") ? 50 : 53;
 
 
 module create(battery) {
- if(battery == "aa") translate([0,0,2]) aa();
- if(battery == "aaa") translate([0,0,7.75]) aaa();
+ if(battery == "aa") translate([0,0,2.5]) aa(); //2
+ if(battery == "aaa") translate([0,0,8.5]) aaa(); //7.75
     
 }
 
