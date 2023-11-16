@@ -1,6 +1,7 @@
-// Edit this parameter in file! 
+include <batteries.scad>
+
 map = [ 
-        ["aaa", "aaa", "aaa"],
+        [AAA, AAA, AAA],
     ];
 
 
@@ -15,20 +16,10 @@ grip=true;
 
 x=len(map);
 y=max([for (y = map)  each(len(y))]);
-maxR = (min([for (y = map)  each(y)]) == "aaa") ? 13 : 17;
-maxH = (min([for (y = map)  each(y)]) == "aaa") ? 50 : 53;
 
-module aa() {
-    width=15;
-    height=51;
-    cylinder(h = height, d = width);
-}
 
-module aaa() {
-    width=11;
-    height=45.25;
-    cylinder(h = height, d = width);
-}
+maxR = MAX_R[min([for (y = map)  each(y)])];
+maxH = MAX_H[min([for (y = map)  each(y)])];
 
 
 module base(width, depth, height, radius) {
@@ -48,27 +39,26 @@ module top(width, depth, height, radius, thickness) {
     }
 }
 
-module create(battery) {
- if(battery == "aa") translate([0,0,2.5]) aa(); //2
- if(battery == "aaa") translate([0,0,8.5]) aaa(); //7.75
+module create(id) {
+ translate([0,0,Z_OFFSET[id]]) battery(id); 
 }
 
 translate([maxR*x*2, maxR*y/2-maxR/2])
 difference(){
-top(maxR*x, maxR*y, 40, radius, thickness);
-if(grip) rotate([0,90,0]) translate([-25,0,-maxR*x/2-thickness/2-radius]) cylinder(maxR*x+thickness+radius*2,r=10);
+	top(maxR*x, maxR*y, 40, radius, thickness);
+	if(grip) rotate([0,90,0]) translate([-25,0,-maxR*x/2-thickness/2-radius]) cylinder(maxR*x+thickness+radius*2,r=10);
 }
 
 
 difference(){
-translate([maxR*x/2-maxR/2, maxR*y/2-maxR/2])
-base(maxR*x, maxR*y, maxH, radius);
+	translate([maxR*x/2-maxR/2, maxR*y/2-maxR/2])
+	base(maxR*x, maxR*y, maxH, radius);
 
 
-for(y = [0:len(map)-1]) {
-  for(battery = [0:len(map[y])-1]) {
-      translate([y*maxR, battery*maxR, 0])  create(map[y][battery]);
-  }
-}
+	for(y = [0:len(map)-1]) {
+	  for(battery = [0:len(map[y])-1]) {
+	      translate([y*maxR, battery*maxR, 0])  create(map[y][battery]);
+	  }
+	}
     }
 
