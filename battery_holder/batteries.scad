@@ -3,7 +3,7 @@ AAA=1;
 
 MAX_R = [ 17, 13 ];
 MAX_H = [ 53, 50 ];
-Z_OFFSET = [2.5, 8.5];
+Z_OFFSET = [1.5, 7.5];
 WIDTH=[15, 11];
 HEIGHT=[51, 45.25];
 

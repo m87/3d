@@ -10,7 +10,7 @@ thickness=3;
 // corener radius
 radius=1;
 // test
-fit=0.225;
+fit=0.215;
 grip=true;
 
 
