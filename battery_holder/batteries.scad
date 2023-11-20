@@ -3,9 +3,8 @@ AAA=1;
 
 MAX_R = [ 17, 13 ];
 MAX_H = [ 53, 50 ];
-Z_OFFSET = [1.5, 7.5];
 WIDTH=[15, 11];
-HEIGHT=[51, 45.25];
+HEIGHT=[50.5, 44.5];
 
 module battery(id) {
   cylinder(h = HEIGHT[id], d = WIDTH[id]);

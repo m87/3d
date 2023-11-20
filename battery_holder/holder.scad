@@ -1,7 +1,7 @@
 include <batteries.scad>
 
 map = [ 
-        [AAA, AAA, AAA],
+        [AAA, AA],
     ];
 
 
@@ -39,8 +39,8 @@ module top(width, depth, height, radius, thickness) {
     }
 }
 
-module create(id) {
- translate([0,0,Z_OFFSET[id]]) battery(id); 
+module create(id, maxH) {
+ translate([0,0, maxH-HEIGHT[id]]) battery(id); 
 }
 
 translate([maxR*x*2, maxR*y/2-maxR/2])
@@ -49,7 +49,6 @@ difference(){
 	if(grip) rotate([0,90,0]) translate([-25,0,-maxR*x/2-thickness/2-radius]) cylinder(maxR*x+thickness+radius*2,r=10);
 }
 
-
 difference(){
 	translate([maxR*x/2-maxR/2, maxR*y/2-maxR/2])
 	base(maxR*x, maxR*y, maxH, radius);
@@ -57,7 +56,7 @@ difference(){
 
 	for(y = [0:len(map)-1]) {
 	  for(battery = [0:len(map[y])-1]) {
-	      translate([y*maxR, battery*maxR, 0])  create(map[y][battery]);
+	      translate([y*maxR, battery*maxR, 0])  create(map[y][battery], maxH);
 	  }
 	}
     }
