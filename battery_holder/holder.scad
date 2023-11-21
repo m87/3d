@@ -1,7 +1,7 @@
 include <batteries.scad>
 
 map = [ 
-        [AAA, AA],
+        [AAA, AA, C, D],
     ];
 
 
@@ -10,7 +10,10 @@ thickness=3;
 // corener radius
 radius=1;
 // test
-fit=0.215;
+cap_fit=0.215;
+battery_fit=0.5;
+space=2;
+bottom_thickness=1.5;
 grip=true;
 
 
@@ -18,8 +21,8 @@ x=len(map);
 y=max([for (y = map)  each(len(y))]);
 
 
-maxR = MAX_R[min([for (y = map)  each(y)])];
-maxH = MAX_H[min([for (y = map)  each(y)])];
+maxR = max([for (x = [for (y = map)  each(y)]) WIDTH[x]]) + space; // TO WIDHT with offset and max
+maxH = max([for (x = [for (y = map)  each(y)]) HEIGHT[x]]) + bottom_thickness; // TO HEIHGHT with offset and max
 
 
 module base(width, depth, height, radius) {
@@ -35,12 +38,12 @@ module top(width, depth, height, radius, thickness) {
           square([width+thickness, depth+thickness], center=true);
          
          translate([0,0,thickness])
-         base(width+fit, depth+fit, height, radius);
+         base(width+cap_fit, depth+cap_fit, height, radius);
     }
 }
 
 module create(id, maxH) {
- translate([0,0, maxH-HEIGHT[id]]) battery(id); 
+ translate([0,0, maxH-HEIGHT[id]]) battery(id, battery_fit); 
 }
 
 translate([maxR*x*2, maxR*y/2-maxR/2])
