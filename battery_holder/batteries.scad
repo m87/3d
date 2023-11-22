@@ -19,15 +19,26 @@ CR123A=0;
 CR2=0;
 
 MN21=0;
-LR1=0;
+
+
+LR1=4;
+LR01=4;
+N=4;
+KN=4;
+AM5=4;
+_4001=4;
+_810=4;
+MN9100=4;
+E90=4;
+_910A=4;
 
 
 
 
 
 
-WIDTH=[14.5, 10.5, 26.2, 34.2];
-HEIGHT=[50.5, 44.5, 50, 61.5];
+WIDTH=[14.5, 10.5, 26.2, 34.2, 12];
+HEIGHT=[50.5, 44.5, 50, 61.5, 30.2];
 
 module battery(id, battery_fit) {
   cylinder(h = HEIGHT[id], d = WIDTH[id] + battery_fit);
