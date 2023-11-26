@@ -1,8 +1,8 @@
 include <batteries.scad>
 
 map = [ 
-        [AAA, AAA, AAA],
-        //[LR1, CR2, C],
+        [AAA, AA, AAA],
+        [LR1, CR2],
     ];
 
 
