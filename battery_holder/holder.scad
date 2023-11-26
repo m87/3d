@@ -8,7 +8,7 @@ map = [
 
 // cap thickness
 thickness=3;
-// corener radius
+// corner radius
 radius=1;
 // test
 cap_fit=0.215;
@@ -22,8 +22,8 @@ x=len(map);
 y=max([for (y = map)  each(len(y))]);
 
 
-maxR = max([for (x = [for (y = map)  each(y)]) WIDTH[x]]) + space; // TO WIDHT with offset and max
-maxH = max([for (x = [for (y = map)  each(y)]) HEIGHT[x]]) + bottom_thickness; // TO HEIHGHT with offset and max
+maxR = max([for (x = [for (y = map)  each(y)]) WIDTH[x]]) + space;
+maxH = max([for (x = [for (y = map)  each(y)]) HEIGHT[x]]) + bottom_thickness;
 
 
 module base(width, depth, height, radius) {
@@ -56,7 +56,6 @@ difference(){
 difference(){
 	translate([maxR*x/2-maxR/2, maxR*y/2-maxR/2])
 	base(maxR*x, maxR*y, maxH, radius);
-
 
 	for(y = [0:len(map)-1]) {
 	  for(battery = [0:len(map[y])-1]) {
